@@ -101,13 +101,13 @@ const Hero = () => {
       <motion.div style={{ opacity, scale }} className="relative z-10 max-w-6xl mx-auto text-center">
         {/* Marquee Ticker */}
         <div className="overflow-hidden whitespace-nowrap mb-12 opacity-40 select-none pointer-events-none">
-          <motion.div 
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="inline-block text-xs font-bold uppercase tracking-[0.3em] text-emerald-900"
-          >
-            Instagram Captions  ·  Product Descriptions  ·  Ad Copy  ·  Website Copy  ·  Email Sequences  ·  Google Profiles  ·  Instagram Captions  ·  Product Descriptions  ·  Ad Copy  ·  Website Copy  ·  Email Sequences  ·  Google Profiles  ·
-          </motion.div>
+          <div className="inline-flex animate-marquee">
+            {[...Array(3)].map((_, i) => (
+              <span key={i} className="inline-block text-xs font-bold uppercase tracking-[0.3em] text-emerald-900 mr-16">
+                Instagram Captions &nbsp;·&nbsp; Product Descriptions &nbsp;·&nbsp; Ad Copy &nbsp;·&nbsp; Website Copy &nbsp;·&nbsp; Email Sequences &nbsp;·&nbsp; Google Profiles &nbsp;·&nbsp;
+              </span>
+            ))}
+          </div>
         </div>
 
         <motion.h1 
@@ -163,7 +163,7 @@ const Hero = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1, duration: 1 }}
-        className="hidden xl:block absolute right-[10%] top-1/3 z-20"
+        className="hidden xl:block absolute right-[2%] top-[18%] z-20"
       >
         <motion.div 
           animate={{ y: [0, -15, 0] }}
@@ -323,21 +323,21 @@ export default function App() {
                   title: "Etsy Shop Owner, HandmadeLux",
                   quote: "I was getting 200 visits a week and barely 3 sales. After the caption rewrite, my conversion literally doubled in the first week. I didn't change anything else.",
                   metric: "+112% conversion",
-                  initials: "SK"
+                  avatar: "https://picsum.photos/seed/sarah/200/200"
                 },
                 {
                   name: "James R.",
                   title: "Fitness Coach, @jameslifts",
                   quote: "My old bio said 'certified trainer, DM for enquiries.' CopyQuill rewrote it and I got 14 new DMs in 3 days without running a single ad. Wild.",
                   metric: "14 DMs in 3 days",
-                  initials: "JR"
+                  avatar: "https://picsum.photos/seed/james/200/200"
                 },
                 {
                   name: "Mia T.",
                   title: "Founder, GlowKit Skincare",
                   quote: "The product description they wrote for my serum made me cringe at my old one. Same product, completely different energy. My add-to-cart rate went from 4% to 11%.",
                   metric: "4% → 11% add-to-cart",
-                  initials: "MT"
+                  avatar: "https://picsum.photos/seed/mia/200/200"
                 }
               ].map((t, idx) => (
                 <motion.div 
@@ -354,8 +354,13 @@ export default function App() {
                   <Quote className="w-10 h-10 text-emerald-100 mb-6" />
                   <p className="text-lg text-slate-600 leading-relaxed mb-8 flex-grow font-light">"{t.quote}"</p>
                   <div className="flex items-center gap-4 pt-8 border-t border-slate-50">
-                    <div className="w-12 h-12 rounded-full bg-emerald-950 text-emerald-400 flex items-center justify-center font-bold text-sm">
-                      {t.initials}
+                    <div className="w-12 h-12 rounded-full overflow-hidden bg-emerald-950 flex items-center justify-center">
+                      <img 
+                        src={t.avatar} 
+                        alt={t.name} 
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
                     </div>
                     <div>
                       <h4 className="font-bold text-emerald-950">{t.name}</h4>
