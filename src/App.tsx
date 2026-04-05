@@ -67,29 +67,30 @@ const PRICING = [
 
 // --- Components ---
 
-const Navbar = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 px-8 py-5 flex justify-between items-center bg-white/70 backdrop-blur-2xl backdrop-saturate-200 border-b border-white/20 shadow-2xl shadow-black/5">
-    <div className="flex items-center gap-3">
-      <div className="w-12 h-12 overflow-hidden flex items-center justify-center rounded-xl">
-        <img 
-          src="https://ais-dev-he4xim5ms2lprv23rk73w7-575389986608.asia-southeast1.run.app/api/attachments/40280456-427c-473d-82d2-517865768565" 
-          alt="CopyQuill Logo" 
-          className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
-        />
+const Navbar = () => {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
+  const pointerEvents = useTransform(scrollY, (value) => value > 50 ? "none" : "auto");
+
+  return (
+    <motion.nav 
+      style={{ opacity, pointerEvents }}
+      className="fixed top-0 left-0 right-0 z-50 px-8 py-5 flex justify-between items-center bg-white/70 backdrop-blur-2xl backdrop-saturate-200 border-b border-white/20 shadow-2xl shadow-black/5"
+    >
+      <div className="flex items-center gap-3">
+        <span className="font-display font-bold text-2xl tracking-tighter text-emerald-950">CopyQuill</span>
       </div>
-      <span className="font-display font-bold text-2xl tracking-tighter text-emerald-950">CopyQuill</span>
-    </div>
-    <div className="hidden md:flex gap-10 text-sm font-semibold text-slate-500 uppercase tracking-widest">
-      <a href="#work" className="hover:text-emerald-950 transition-all hover:tracking-[0.15em]">Work</a>
-      <a href="#pricing" className="hover:text-emerald-950 transition-all hover:tracking-[0.15em]">Pricing</a>
-      <a href="#process" className="hover:text-emerald-950 transition-all hover:tracking-[0.15em]">Process</a>
-    </div>
-    <a href="#contact" className="bg-emerald-950 text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-emerald-900 transition-all shadow-2xl shadow-emerald-950/30 hover:scale-105 active:scale-95">
-      Start Project
-    </a>
-  </nav>
-);
+      <div className="hidden md:flex gap-10 text-sm font-semibold text-slate-500 uppercase tracking-widest">
+        <a href="#work" className="hover:text-emerald-950 transition-all hover:tracking-[0.15em]">Work</a>
+        <a href="#pricing" className="hover:text-emerald-950 transition-all hover:tracking-[0.15em]">Pricing</a>
+        <a href="#process" className="hover:text-emerald-950 transition-all hover:tracking-[0.15em]">Process</a>
+      </div>
+      <a href="#contact" className="bg-emerald-950 text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-emerald-900 transition-all shadow-2xl shadow-emerald-950/30 hover:scale-105 active:scale-95">
+        Start Project
+      </a>
+    </motion.nav>
+  );
+};
 
 const Hero = () => {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -644,14 +645,6 @@ export default function App() {
       <footer className="px-8 py-20 border-t border-slate-100 bg-slate-50/30">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 overflow-hidden flex items-center justify-center rounded-lg">
-              <img 
-                src="https://ais-dev-he4xim5ms2lprv23rk73w7-575389986608.asia-southeast1.run.app/api/attachments/40280456-427c-473d-82d2-517865768565" 
-                alt="CopyQuill Logo" 
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            </div>
             <span className="font-display font-bold text-2xl tracking-tighter text-emerald-950">CopyQuill</span>
           </div>
           <p className="text-slate-400 text-sm font-medium tracking-widest uppercase">
