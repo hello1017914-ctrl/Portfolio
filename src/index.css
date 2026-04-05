@@ -32,8 +32,25 @@
   }
 }
 
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.03;
+  filter: contrast(150%) brightness(100%);
+}
+
 .glass {
-  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/5;
+  @apply bg-white/70 backdrop-blur-2xl backdrop-saturate-200 border border-white/20 shadow-2xl shadow-black/5;
 }
 
 .gradient-text {
